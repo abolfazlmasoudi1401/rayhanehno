@@ -30,7 +30,7 @@ nav{display:flex;gap:30px;font-size:13px;color:#d2c9b8}nav a:hover{color:var(--g
 .primary-btn{display:inline-block;padding:14px 28px;background:linear-gradient(120deg,#a67b35,#e7c77d);color:#17120a;border:0;border-radius:4px;font-weight:700;transition:.3s}
 .primary-btn:hover{transform:translateY(-4px);box-shadow:0 10px 35px #c9a45c33}
 .secondary-btn{display:inline-block;padding:13px 24px;border:1px solid var(--line);color:var(--white);border-radius:4px;margin-right:10px}
-.scene-wrap{height:510px;width:100%;position:relative}#scene{width:100%;height:100%;display:block}
+.scene-wrap{height:510px;width:100%;position:relative}#scene{width:100%;height:100%;display:block;touch-action:none;cursor:grab}#scene:active{cursor:grabbing}.scene-control-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);color:#d8c18d;background:rgba(12,10,7,.72);border:1px solid rgba(201,164,92,.28);border-radius:30px;padding:7px 13px;font-size:11px;white-space:nowrap;pointer-events:none}
 .scene-label{position:absolute;bottom:30px;right:50%;transform:translateX(50%);color:var(--gold);font-size:12px;letter-spacing:3px;white-space:nowrap}
 .scroll-hint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:#777;font-size:11px}
 .section{padding:100px 8%}.section-heading{text-align:center;margin-bottom:55px}
@@ -96,7 +96,7 @@ header{padding:0 5%}nav{display:none}
 <a href="#products" class="primary-btn">مشاهده محصولات</a>
 <a href="#story" class="secondary-btn">داستان ما</a>
 </div>
-<div class="scene-wrap"><canvas id="scene"></canvas><div class="scene-label">DISCOVER YOUR SIGNATURE SCENT</div></div>
+<div class="scene-wrap"><canvas id="scene"></canvas><div class="scene-control-hint">برای چرخش، بکشید یا لمس کنید؛ با رها کردن به حالت اول برمی‌گردد</div><div class="scene-label">DISCOVER YOUR SIGNATURE SCENT</div></div>
 <div class="scroll-hint">برای کشف بیشتر اسکرول کنید ↓</div>
 </section>
 <section class="section" id="products">
@@ -234,11 +234,39 @@ if(canvas){
  });
  const floor=new THREE.Mesh(new THREE.CircleGeometry(1.8,64),new THREE.MeshBasicMaterial({color:0x21180b,transparent:true,opacity:0.45}));
  floor.rotation.x=-Math.PI/2; floor.position.y=-1.75; scene.add(floor);
- let mouseX=0,targetRotation=0;
- canvas.addEventListener('pointermove',e=>{const rect=canvas.getBoundingClientRect();mouseX=(e.clientX-rect.left)/rect.width-0.5;});
+ // چرخش تعاملی با ماوس و لمس؛ پس از رها کردن، مدل نرم به زاویه اولیه برمی‌گردد.
+ let dragging=false,lastX=0,lastY=0;
+ let targetRotX=0,targetRotY=0;
+ const dragSpeed=0.008;
+ canvas.addEventListener('pointerdown',e=>{
+   dragging=true;lastX=e.clientX;lastY=e.clientY;
+   canvas.setPointerCapture(e.pointerId);
+ });
+ canvas.addEventListener('pointermove',e=>{
+   if(!dragging)return;
+   const dx=e.clientX-lastX,dy=e.clientY-lastY;
+   lastX=e.clientX;lastY=e.clientY;
+   targetRotY+=dx*dragSpeed;
+   targetRotX+=dy*dragSpeed;
+   targetRotX=Math.max(-0.85,Math.min(0.85,targetRotX));
+ });
+ function releaseDrag(){
+   dragging=false;
+   targetRotX=0;
+   targetRotY=0;
+ }
+ canvas.addEventListener('pointerup',releaseDrag);
+ canvas.addEventListener('pointercancel',releaseDrag);
+ canvas.addEventListener('lostpointercapture',releaseDrag);
  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);}
  window.addEventListener('resize',resize);
- function animate(){requestAnimationFrame(animate);targetRotation=mouseX*0.65+window.scrollY*0.0006;modelPivot.rotation.y+=(targetRotation-modelPivot.rotation.y)*0.04;modelPivot.rotation.x=Math.sin(Date.now()*0.0005)*0.035;modelPivot.position.y=Math.sin(Date.now()*0.001)*0.06;renderer.render(scene,camera);}
+ function animate(){
+   requestAnimationFrame(animate);
+   modelPivot.rotation.x+=(targetRotX-modelPivot.rotation.x)*0.12;
+   modelPivot.rotation.y+=(targetRotY-modelPivot.rotation.y)*0.12;
+   modelPivot.position.y=Math.sin(Date.now()*0.001)*0.06;
+   renderer.render(scene,camera);
+ }
  animate();
 }
 </script>
