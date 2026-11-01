@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -7,1051 +6,238 @@
 <meta name="theme-color" content="#090909">
 <meta name="description" content="رایحه‌نو؛ تجربه‌ای لوکس از دنیای عطر و ادکلن">
 <title>رایحه‌نو | دنیایی از عطر و ادکلن</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 <script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
-  }
-}
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}
 </script>
-
 <style>
-:root {
-  --bg:#090909;
-  --panel:#121212;
-  --gold:#c9a45c;
-  --gold-light:#f0d99b;
-  --white:#f5f1e8;
-  --muted:#99948b;
-  --line:rgba(201,164,92,.22);
-}
-
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html {
-  scroll-behavior:smooth;
-}
-
-body {
-  background:var(--bg);
-  color:var(--white);
-  font-family:'Vazirmatn',sans-serif;
-  overflow-x:hidden;
-}
-
-button {
-  font-family:inherit;
-  cursor:pointer;
-}
-
-a {
-  text-decoration:none;
-  color:inherit;
-}
-
-header {
-  height:76px;
-  padding:0 7%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:fixed;
-  width:100%;
-  top:0;
-  z-index:50;
-  background:rgba(9,9,9,.82);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-}
-
-.logo {
-  font-size:25px;
-  font-weight:800;
-  color:var(--gold);
-  letter-spacing:-1px;
-}
-
-.logo span {
-  color:white;
-}
-
-nav {
-  display:flex;
-  gap:30px;
-  font-size:13px;
-  color:#d2c9b8;
-}
-
-nav a:hover {
-  color:var(--gold);
-}
-
-.cart-button {
-  border:1px solid var(--gold);
-  background:transparent;
-  color:var(--gold-light);
-  padding:10px 17px;
-  border-radius:30px;
-}
-
-.cart-count {
-  background:var(--gold);
-  color:#111;
-  border-radius:50%;
-  padding:1px 6px;
-  margin-right:5px;
-}
-
-.hero {
-  min-height:100vh;
-  padding:125px 8% 60px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:20px;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero:before {
-  content:"";
-  position:absolute;
-  width:450px;
-  height:450px;
-  background:rgba(183,133,48,.10);
-  filter:blur(100px);
-  border-radius:50%;
-  top:20%;
-  left:15%;
-}
-
-.hero-content {
-  position:relative;
-  z-index:2;
-}
-
-.eyebrow {
-  color:var(--gold);
-  font-size:13px;
-  letter-spacing:2px;
-  margin-bottom:22px;
-}
-
-.hero h1 {
-  font-size:clamp(42px,6vw,76px);
-  line-height:1.5;
-  font-weight:800;
-}
-
-.hero h1 span {
-  color:var(--gold);
-}
-
-.hero p {
-  color:var(--muted);
-  line-height:2.3;
-  max-width:480px;
-  margin:18px 0 30px;
-  font-size:14px;
-}
-
-.primary-btn {
-  display:inline-block;
-  padding:14px 28px;
-  background:linear-gradient(120deg,#a67b35,#e7c77d);
-  color:#17120a;
-  border:0;
-  border-radius:4px;
-  font-weight:700;
-  transition:.3s;
-}
-
-.primary-btn:hover {
-  transform:translateY(-4px);
-  box-shadow:0 10px 35px #c9a45c33;
-}
-
-.secondary-btn {
-  display:inline-block;
-  padding:13px 24px;
-  border:1px solid var(--line);
-  color:var(--white);
-  border-radius:4px;
-  margin-right:10px;
-}
-
-.scene-wrap {
-  height:510px;
-  width:100%;
-  position:relative;
-}
-
-#scene {
-  width:100%;
-  height:100%;
-  display:block;
-}
-
-.scene-label {
-  position:absolute;
-  bottom:30px;
-  right:50%;
-  transform:translateX(50%);
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:3px;
-  white-space:nowrap;
-}
-
-.scroll-hint {
-  position:absolute;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  color:#777;
-  font-size:11px;
-}
-
-.section {
-  padding:100px 8%;
-}
-
-.section-heading {
-  text-align:center;
-  margin-bottom:55px;
-}
-
-.section-heading small {
-  color:var(--gold);
-  letter-spacing:2px;
-}
-
-.section-heading h2 {
-  font-size:35px;
-  margin-top:12px;
-}
-
-.section-heading p {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:12px;
-}
-
-.products {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-}
-
-.product {
-  background:linear-gradient(145deg,#171717,#0e0e0e);
-  border:1px solid var(--line);
-  padding:20px;
-  border-radius:8px;
-  text-align:center;
-  transition:.35s;
-}
-
-.product:hover {
-  transform:translateY(-8px);
-  border-color:var(--gold);
-}
-
-.product-art {
-  height:210px;
-  display:grid;
-  place-items:center;
-  background:radial-gradient(circle,#4b3920 0%,#19140d 40%,transparent 72%);
-  margin-bottom:18px;
-}
-
-.mini-bottle {
-  width:75px;
-  height:125px;
-  border:2px solid #c9a45c;
-  border-radius:9px 9px 16px 16px;
-  background:linear-gradient(90deg,#3d2b13,#b58a3d,#30200e);
-  position:relative;
-  box-shadow:0 0 35px #c9a45c33;
-}
-
-.mini-bottle:before {
-  content:"";
-  position:absolute;
-  width:28px;
-  height:24px;
-  top:-25px;
-  right:21px;
-  background:#c9a45c;
-  border-radius:4px 4px 0 0;
-}
-
-.mini-bottle:after {
-  content:"R";
-  position:absolute;
-  top:48px;
-  right:0;
-  width:100%;
-  text-align:center;
-  font-family:serif;
-  color:#f5d58c;
-  font-size:27px;
-}
-
-.product h3 {
-  font-size:17px;
-}
-
-.product p {
-  color:var(--muted);
-  font-size:12px;
-  margin:10px 0;
-}
-
-.price {
-  color:var(--gold-light);
-  font-weight:700;
-  margin:15px 0;
-}
-
-.add-btn {
-  background:transparent;
-  color:var(--gold);
-  border:1px solid var(--gold);
-  padding:10px 22px;
-  border-radius:4px;
-  width:100%;
-}
-
-.add-btn:hover {
-  background:var(--gold);
-  color:#111;
-}
-
-.features {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.feature {
-  padding:30px 20px;
-  text-align:center;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:#111;
-}
-
-.feature .symbol {
-  color:var(--gold);
-  font-size:30px;
-  margin-bottom:15px;
-}
-
-.feature h3 {
-  font-size:16px;
-  margin-bottom:10px;
-}
-
-.feature p {
-  color:var(--muted);
-  font-size:12px;
-  line-height:2;
-}
-
-.story {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-  align-items:center;
-  background:#101010;
-}
-
-.story-art {
-  min-height:300px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--line);
-  background:radial-gradient(circle,#4b351c,#12100c 65%);
-  font-size:100px;
-  color:var(--gold);
-}
-
-.story-text h2 {
-  font-size:32px;
-  margin-bottom:20px;
-}
-
-.story-text p {
-  color:var(--muted);
-  font-size:14px;
-  line-height:2.5;
-}
-
-footer {
-  border-top:1px solid var(--line);
-  padding:40px 8%;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  line-height:2.5;
-}
-
-footer strong {
-  color:var(--gold);
-  font-size:22px;
-}
-
-.cart-panel {
-  position:fixed;
-  top:0;
-  left:-420px;
-  width:min(390px,90%);
-  height:100%;
-  z-index:100;
-  background:#151515;
-  border-right:1px solid var(--gold);
-  padding:25px;
-  transition:.35s;
-  overflow-y:auto;
-}
-
-.cart-panel.open {
-  left:0;
-}
-
-.cart-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid var(--line);
-  padding-bottom:18px;
-}
-
-.close-cart {
-  color:var(--gold);
-  background:none;
-  border:0;
-  font-size:25px;
-}
-
-.cart-items {
-  padding:25px 0;
-}
-
-.cart-item {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 0;
-  border-bottom:1px solid #292929;
-  font-size:13px;
-}
-
-.remove-btn {
-  color:#e99b8e;
-  background:none;
-  border:0;
-  font-size:12px;
-}
-
-.cart-total {
-  color:var(--gold);
-  margin:20px 0;
-  font-weight:700;
-}
-
-.overlay {
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000a;
-  z-index:90;
-}
-
-.overlay.show {
-  display:block;
-}
-
-.modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:120;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  background:#000b;
-}
-
-.modal.open {
-  display:flex;
-}
-
-.modal-box {
-  background:#171717;
-  border:1px solid var(--gold);
-  padding:28px;
-  width:min(420px,100%);
-  border-radius:10px;
-}
-
-.modal-box h2 {
-  color:var(--gold);
-  margin-bottom:18px;
-}
-
-.modal-box input,
-.modal-box textarea {
-  width:100%;
-  background:#0c0c0c;
-  border:1px solid #393328;
-  color:white;
-  padding:13px;
-  margin-bottom:12px;
-  border-radius:5px;
-  font-family:inherit;
-  direction:rtl;
-}
-
-.modal-box textarea {
-  min-height:80px;
-}
-
-.modal-box button {
-  width:100%;
-}
-
-.modal-close {
-  float:left;
-  background:none;
-  color:var(--gold);
-  border:0;
-  font-size:22px;
-}
-
-#notice {
-  position:fixed;
-  bottom:25px;
-  right:50%;
-  transform:translateX(50%);
-  background:#c9a45c;
-  color:#111;
-  padding:12px 22px;
-  border-radius:5px;
-  z-index:200;
-  display:none;
-  font-size:13px;
-}
-
-@media(max-width:800px) {
-  header {
-    padding:0 5%;
-  }
-
-  nav {
-    display:none;
-  }
-
-  .hero {
-    grid-template-columns:1fr;
-    text-align:center;
-    padding:120px 6% 45px;
-  }
-
-  .hero p {
-    margin-right:auto;
-    margin-left:auto;
-  }
-
-  .scene-wrap {
-    height:370px;
-    grid-row:1;
-  }
-
-  .hero-content {
-    grid-row:2;
-  }
-
-  .scroll-hint {
-    display:none;
-  }
-
-  .products {
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
-
-  .product {
-    padding:12px;
-  }
-
-  .product-art {
-    height:150px;
-  }
-
-  .mini-bottle {
-    transform:scale(.8);
-  }
-
-  .features {
-    grid-template-columns:1fr;
-  }
-
-  .story {
-    grid-template-columns:1fr;
-    gap:25px;
-  }
-
-  .section {
-    padding:75px 5%;
-  }
-
-  .section-heading h2 {
-    font-size:27px;
-  }
-}
-
-@media(max-width:380px) {
-  .products {
-    grid-template-columns:1fr;
-  }
-
-  .logo {
-    font-size:21px;
-  }
-
-  .cart-button {
-    padding:8px 12px;
-  }
-}
+:root{--bg:#090909;--panel:#121212;--gold:#c9a45c;--gold-light:#f0d99b;--white:#f5f1e8;--muted:#99948b;--line:rgba(201,164,92,.22)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Vazirmatn',sans-serif;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer}a{text-decoration:none;color:inherit}
+header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;position:fixed;width:100%;top:0;z-index:50;background:rgba(9,9,9,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.logo{font-size:25px;font-weight:800;color:var(--gold);letter-spacing:-1px}.logo span{color:white}
+nav{display:flex;gap:30px;font-size:13px;color:#d2c9b8}nav a:hover{color:var(--gold)}
+.cart-button{border:1px solid var(--gold);background:transparent;color:var(--gold-light);padding:10px 17px;border-radius:30px}
+.cart-count{background:var(--gold);color:#111;border-radius:50%;padding:1px 6px;margin-right:5px}
+.hero{min-height:100vh;padding:125px 8% 60px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:450px;height:450px;background:rgba(183,133,48,.10);filter:blur(100px);border-radius:50%;top:20%;left:15%}
+.hero-content{position:relative;z-index:2}.eyebrow{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:22px}
+.hero h1{font-size:clamp(42px,6vw,76px);line-height:1.5;font-weight:800}.hero h1 span{color:var(--gold)}
+.hero p{color:var(--muted);line-height:2.3;max-width:480px;margin:18px 0 30px;font-size:14px}
+.primary-btn{display:inline-block;padding:14px 28px;background:linear-gradient(120deg,#a67b35,#e7c77d);color:#17120a;border:0;border-radius:4px;font-weight:700;transition:.3s}
+.primary-btn:hover{transform:translateY(-4px);box-shadow:0 10px 35px #c9a45c33}
+.secondary-btn{display:inline-block;padding:13px 24px;border:1px solid var(--line);color:var(--white);border-radius:4px;margin-right:10px}
+.scene-wrap{height:510px;width:100%;position:relative}#scene{width:100%;height:100%;display:block}
+.scene-label{position:absolute;bottom:30px;right:50%;transform:translateX(50%);color:var(--gold);font-size:12px;letter-spacing:3px;white-space:nowrap}
+.scroll-hint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:#777;font-size:11px}
+.section{padding:100px 8%}.section-heading{text-align:center;margin-bottom:55px}
+.section-heading small{color:var(--gold);letter-spacing:2px}.section-heading h2{font-size:35px;margin-top:12px}
+.section-heading p{color:var(--muted);font-size:13px;margin-top:12px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product{background:linear-gradient(145deg,#171717,#0e0e0e);border:1px solid var(--line);padding:20px;border-radius:8px;text-align:center;transition:.35s}
+.product:hover{transform:translateY(-8px);border-color:var(--gold)}
+.product-art{height:210px;display:grid;place-items:center;background:radial-gradient(circle,#4b3920 0%,#19140d 40%,transparent 72%);margin-bottom:18px}
+.mini-bottle{width:75px;height:125px;border:2px solid #c9a45c;border-radius:9px 9px 16px 16px;background:linear-gradient(90deg,#3d2b13,#b58a3d,#30200e);position:relative;box-shadow:0 0 35px #c9a45c33}
+.mini-bottle:before{content:"";position:absolute;width:28px;height:24px;top:-25px;right:21px;background:#c9a45c;border-radius:4px 4px 0 0}
+.mini-bottle:after{content:"R";position:absolute;top:48px;right:0;width:100%;text-align:center;font-family:serif;color:#f5d58c;font-size:27px}
+.product h3{font-size:17px}.product p{color:var(--muted);font-size:12px;margin:10px 0}
+.price{color:var(--gold-light);font-weight:700;margin:15px 0}
+.add-btn{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:10px 22px;border-radius:4px;width:100%}
+.add-btn:hover{background:var(--gold);color:#111}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{padding:30px 20px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#111}
+.feature .symbol{color:var(--gold);font-size:30px;margin-bottom:15px}.feature h3{font-size:16px;margin-bottom:10px}
+.feature p{color:var(--muted);font-size:12px;line-height:2}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;background:#101010}
+.story-art{min-height:300px;display:grid;place-items:center;border:1px solid var(--line);background:radial-gradient(circle,#4b351c,#12100c 65%);font-size:100px;color:var(--gold)}
+.story-text h2{font-size:32px;margin-bottom:20px}.story-text p{color:var(--muted);font-size:14px;line-height:2.5}
+footer{border-top:1px solid var(--line);padding:40px 8%;text-align:center;color:var(--muted);font-size:12px;line-height:2.5}
+footer strong{color:var(--gold);font-size:22px}
+.cart-panel{position:fixed;top:0;left:-420px;width:min(390px,90%);height:100%;z-index:100;background:#151515;border-right:1px solid var(--gold);padding:25px;transition:.35s;overflow-y:auto}
+.cart-panel.open{left:0}.cart-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}
+.close-cart{color:var(--gold);background:none;border:0;font-size:25px}.cart-items{padding:25px 0}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #292929;font-size:13px}
+.remove-btn{color:#e99b8e;background:none;border:0;font-size:12px}.cart-total{color:var(--gold);margin:20px 0;font-weight:700}
+.overlay{display:none;position:fixed;inset:0;background:#000a;z-index:90}.overlay.show{display:block}
+.modal{display:none;position:fixed;inset:0;z-index:120;align-items:center;justify-content:center;padding:15px;background:#000b}
+.modal.open{display:flex}.modal-box{background:#171717;border:1px solid var(--gold);padding:28px;width:min(420px,100%);border-radius:10px}
+.modal-box h2{color:var(--gold);margin-bottom:18px}.modal-box input,.modal-box textarea{width:100%;background:#0c0c0c;border:1px solid #393328;color:white;padding:13px;margin-bottom:12px;border-radius:5px;font-family:inherit;direction:rtl}
+.modal-box textarea{min-height:80px}.modal-box button{width:100%}
+.modal-close{float:left;background:none;color:var(--gold);border:0;font-size:22px}
+#notice{position:fixed;bottom:25px;right:50%;transform:translateX(50%);background:#c9a45c;color:#111;padding:12px 22px;border-radius:5px;z-index:200;display:none;font-size:13px}
+@media(max-width:800px){
+header{padding:0 5%}nav{display:none}
+.hero{grid-template-columns:1fr;text-align:center;padding:120px 6% 45px}
+.hero p{margin-right:auto;margin-left:auto}.scene-wrap{height:370px;grid-row:1}.hero-content{grid-row:2}.scroll-hint{display:none}
+.products{grid-template-columns:repeat(2,1fr);gap:12px}.product{padding:12px}.product-art{height:150px}.mini-bottle{transform:scale(.8)}
+.features{grid-template-columns:1fr}.story{grid-template-columns:1fr;gap:25px}
+.section{padding:75px 5%}.section-heading h2{font-size:27px}
+}
+@media(max-width:380px){.products{grid-template-columns:1fr}.logo{font-size:21px}.cart-button{padding:8px 12px}}
 </style>
 </head>
-
 <body>
-
 <header>
-  <a href="#" class="logo">رایحه<span>‌نو</span></a>
-
-  <nav>
-    <a href="#home">خانه</a>
-    <a href="#products">محصولات</a>
-    <a href="#features">مزایای ما</a>
-    <a href="#story">درباره ما</a>
-  </nav>
-
-  <button class="cart-button" onclick="toggleCart()">
-    سبد خرید <span class="cart-count" id="cartCount">0</span>
-  </button>
+<a href="#" class="logo">رایحه<span>‌نو</span></a>
+<nav>
+<a href="#home">خانه</a><a href="#products">محصولات</a><a href="#features">مزایای ما</a><a href="#story">درباره ما</a>
+</nav>
+<button class="cart-button" onclick="toggleCart()">سبد خرید <span class="cart-count" id="cartCount">۰</span></button>
 </header>
-
 <main>
-
 <section class="hero" id="home">
-
-  <div class="hero-content">
-    <div class="eyebrow">RAYHANEHNO • LUXURY PERFUME</div>
-
-    <h1>
-      دنیایی از<br>
-      <span>عطر و ادکلن</span>
-    </h1>
-
-    <p>
-      رایحه‌ای که شخصیت شما را روایت می‌کند.
-      تجربه‌ای متفاوت از انتخاب عطرهای خاص،
-      در دنیای لوکس رایحه‌نو.
-    </p>
-
-    <a href="#products" class="primary-btn">مشاهده محصولات</a>
-    <a href="#story" class="secondary-btn">داستان ما</a>
-  </div>
-
-  <div class="scene-wrap">
-    <canvas id="scene"></canvas>
-    <div class="scene-label">DISCOVER YOUR SIGNATURE SCENT</div>
-  </div>
-
-  <div class="scroll-hint">برای کشف بیشتر اسکرول کنید ↓</div>
-
-</section>
-
-<section class="section" id="products">
-
-  <div class="section-heading">
-    <small>OUR COLLECTION</small>
-    <h2>کلکسیون رایحه‌نو</h2>
-    <p>رایحه مورد علاقه خود را انتخاب کنید.</p>
-  </div>
-
-  <div class="products">
-
-    <article class="product">
-      <div class="product-art"><div class="mini-bottle"></div></div>
-      <h3>طلوع طلایی</h3>
-      <p>رایحه گرم و شیرین | مناسب شب</p>
-      <div class="price">۲,۵۰۰,۰۰۰ تومان</div>
-      <button class="add-btn" onclick="addToCart(0)">افزودن به سبد</button>
-    </article>
-
-    <article class="product">
-      <div class="product-art"><div class="mini-bottle"></div></div>
-      <h3>نسیم سلطنتی</h3>
-      <p>رایحه خنک و ملایم | مناسب روز</p>
-      <div class="price">۱,۹۰۰,۰۰۰ تومان</div>
-      <button class="add-btn" onclick="addToCart(1)">افزودن به سبد</button>
-    </article>
-
-    <article class="product">
-      <div class="product-art"><div class="mini-bottle"></div></div>
-      <h3>راز شب</h3>
-      <p>رایحه تلخ و چوبی | خاص و ماندگار</p>
-      <div class="price">۳,۲۰۰,۰۰۰ تومان</div>
-      <button class="add-btn" onclick="addToCart(2)">افزودن به سبد</button>
-    </article>
-
-    <article class="product">
-      <div class="product-art"><div class="mini-bottle"></div></div>
-      <h3>لمس بهار</h3>
-      <p>رایحه گلی و لطیف | مناسب روز</p>
-      <div class="price">۲,۱۰۰,۰۰۰ تومان</div>
-      <button class="add-btn" onclick="addToCart(3)">افزودن به سبد</button>
-    </article>
-
-    <article class="product">
-      <div class="product-art"><div class="mini-bottle"></div></div>
-      <h3>امپراتور</h3>
-      <p>رایحه رسمی و قدرتمند</p>
-      <div class="price">۳,۵۰۰,۰۰۰ تومان</div>
-      <button class="add-btn" onclick="addToCart(4)">افزودن به سبد</button>
-    </article>
-
-    <article class="product">
-      <div class="product-art"><div class="mini-bottle"></div></div>
-      <h3>رویای سفید</h3>
-      <p>رایحه تمیز و آرامش‌بخش</p>
-      <div class="price">۱,۷۰۰,۰۰۰ تومان</div>
-      <button class="add-btn" onclick="addToCart(5)">افزودن به سبد</button>
-    </article>
-
-  </div>
-</section>
-
-<section class="section" id="features">
-
-  <div class="section-heading">
-    <small>WHY RAYHANEHNO</small>
-    <h2>تجربه‌ای متفاوت</h2>
-    <p>جزئیات کوچک، تفاوت‌های بزرگ می‌سازند.</p>
-  </div>
-
-  <div class="features">
-
-    <div class="feature">
-      <div class="symbol">✧</div>
-      <h3>انتخاب هوشمند رایحه</h3>
-      <p>کمک به انتخاب عطر بر اساس سلیقه، فصل و موقعیت.</p>
-    </div>
-
-    <div class="feature">
-      <div class="symbol">♛</div>
-      <h3>توجه به اصالت کالا</h3>
-      <p>هدف ما ارائه اطلاعات شفاف درباره محصولات است.</p>
-    </div>
-
-    <div class="feature">
-      <div class="symbol">◇</div>
-      <h3>تجربه خرید آسان</h3>
-      <p>دسترسی ساده به محصولات و ثبت سفارش آنلاین.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="section story" id="story">
-
-  <div class="story-art">✦</div>
-
-  <div class="story-text">
-    <small class="eyebrow">OUR STORY</small>
-    <h2>داستان رایحه‌نو</h2>
-    <p>
-      رایحه‌نو با یک ایده ساده آغاز شد:
-      انتخاب عطر باید تجربه‌ای لذت‌بخش و آسان باشد.
-      ما می‌خواهیم دنیای رایحه‌ها را به شکلی متفاوت
-      به شما معرفی کنیم؛ از رایحه‌های روزمره تا
-      انتخاب‌های خاص و فراموش‌نشدنی.
-    </p>
-  </div>
-
-</section>
-
-</main>
-
-<footer>
-  <strong>رایحه‌نو</strong>
-  <p>دنیایی از عطر و ادکلن</p>
-  <p>© 2026 Rayhanehno | تمامی حقوق محفوظ است.</p>
-  <p>این نسخه، نمونه نمایشی فروشگاه اینترنتی است.</p>
-</footer>
-
-<div class="overlay" id="overlay" onclick="closePanels()"></div>
-
-<aside class="cart-panel" id="cartPanel">
-  <div class="cart-header">
-    <h3>سبد خرید شما</h3>
-    <button class="close-cart" onclick="toggleCart()">×</button>
-  </div>
-
-  <div class="cart-items" id="cartItems">
-    سبد خرید خالی است.
-  </div>
-
-  <div class="cart-total" id="cartTotal">مجموع: ۰ تومان</div>
-
-  <button class="primary-btn" style="width:100%" onclick="openOrder()">
-    ادامه و ثبت سفارش
-  </button>
-</aside>
-
-<div class="modal" id="orderModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeOrder()">×</button>
-    <h2>ثبت سفارش رایحه‌نو</h2>
-
-    <form id="orderForm">
-      <input id="customerName" placeholder="نام و نام خانوادگی" required>
-      <input id="customerPhone" type="tel" placeholder="شماره تماس" required>
-      <textarea id="customerAddress" placeholder="آدرس یا توضیحات سفارش" required></textarea>
-      <button type="submit" class="primary-btn">ثبت سفارش نمایشی</button>
-    </form>
-  </div>
+<div class="hero-content">
+<div class="eyebrow">RAYHANEHNO • LUXURY PERFUME</div>
+<h1>دنیایی از<br><span>عطر و ادکلن</span></h1>
+<p>رایحه‌ای که شخصیت شما را روایت می‌کند. تجربه‌ای متفاوت از انتخاب عطرهای خاص، در دنیای لوکس رایحه‌نو.</p>
+<a href="#products" class="primary-btn">مشاهده محصولات</a>
+<a href="#story" class="secondary-btn">داستان ما</a>
 </div>
-
+<div class="scene-wrap"><canvas id="scene"></canvas><div class="scene-label">DISCOVER YOUR SIGNATURE SCENT</div></div>
+<div class="scroll-hint">برای کشف بیشتر اسکرول کنید ↓</div>
+</section>
+<section class="section" id="products">
+<div class="section-heading"><small>OUR COLLECTION</small><h2>کلکسیون رایحه‌نو</h2><p>رایحه مورد علاقه خود را انتخاب کنید.</p></div>
+<div class="products">
+<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>طلوع طلایی</h3><p>رایحه گرم و شیرین | مناسب شب</p><div class="price">۲,۵۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(0)">افزودن به سبد</button></article>
+<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>نسیم سلطنتی</h3><p>رایحه خنک و ملایم | مناسب روز</p><div class="price">۱,۹۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(1)">افزودن به سبد</button></article>
+<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>راز شب</h3><p>رایحه تلخ و چوبی | خاص و ماندگار</p><div class="price">۳,۲۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(2)">افزودن به سبد</button></article>
+<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>لمس بهار</h3><p>رایحه گلی و لطیف | مناسب روز</p><div class="price">۲,۱۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(3)">افزودن به سبد</button></article>
+<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>امپراتور</h3><p>رایحه رسمی و قدرتمند</p><div class="price">۳,۵۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(4)">افزودن به سبد</button></article>
+<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>رویای سفید</h3><p>رایحه تمیز و آرامش‌بخش</p><div class="price">۱,۷۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(5)">افزودن به سبد</button></article>
+</div>
+</section>
+<section class="section" id="features">
+<div class="section-heading"><small>WHY RAYHANEHNO</small><h2>تجربه‌ای متفاوت</h2><p>جزئیات کوچک، تفاوت‌های بزرگ می‌سازند.</p></div>
+<div class="features">
+<div class="feature"><div class="symbol">✧</div><h3>انتخاب هوشمند رایحه</h3><p>کمک به انتخاب عطر بر اساس سلیقه، فصل و موقعیت.</p></div>
+<div class="feature"><div class="symbol">♛</div><h3>توجه به اصالت کالا</h3><p>هدف ما ارائه اطلاعات شفاف درباره محصولات است.</p></div>
+<div class="feature"><div class="symbol">◇</div><h3>تجربه خرید آسان</h3><p>دسترسی ساده به محصولات و ثبت سفارش آنلاین.</p></div>
+</div>
+</section>
+<section class="section story" id="story">
+<div class="story-art">✦</div>
+<div class="story-text"><small class="eyebrow">OUR STORY</small><h2>داستان رایحه‌نو</h2><p>رایحه‌نو با یک ایده ساده آغاز شد: انتخاب عطر باید تجربه‌ای لذت‌بخش و آسان باشد. ما می‌خواهیم دنیای رایحه‌ها را به شکلی متفاوت به شما معرفی کنیم؛ از رایحه‌های روزمره تا انتخاب‌های خاص و فراموش‌نشدنی.</p></div>
+</section>
+</main>
+<footer><strong>رایحه‌نو</strong><p>دنیایی از عطر و ادکلن</p><p>© 2026 Rayhanehno | تمامی حقوق محفوظ است.</p><p>این نسخه، نمونه نمایشی فروشگاه اینترنتی است.</p></footer>
+<div class="overlay" id="overlay" onclick="closePanels()"></div>
+<aside class="cart-panel" id="cartPanel">
+<div class="cart-header"><h3>سبد خرید شما</h3><button class="close-cart" onclick="toggleCart()">×</button></div>
+<div class="cart-items" id="cartItems">سبد خرید خالی است.</div>
+<div class="cart-total" id="cartTotal">مجموع: ۰ تومان</div>
+<button class="primary-btn" style="width:100%" onclick="openOrder()">ادامه و ثبت سفارش</button>
+</aside>
+<div class="modal" id="orderModal"><div class="modal-box">
+<button class="modal-close" onclick="closeOrder()">×</button><h2>ثبت سفارش رایحه‌نو</h2>
+<form id="orderForm">
+<input id="customerName" placeholder="نام و نام خانوادگی" required>
+<input id="customerPhone" type="tel" placeholder="شماره تماس" required>
+<textarea id="customerAddress" placeholder="آدرس یا توضیحات سفارش" required></textarea>
+<button type="submit" class="primary-btn">ثبت سفارش نمایشی</button>
+</form>
+</div></div>
 <div id="notice"></div>
-
 <script>
-const products = [
-  {name:"طلوع طلایی",price:2500000},
-  {name:"نسیم سلطنتی",price:1900000},
-  {name:"راز شب",price:3200000},
-  {name:"لمس بهار",price:2100000},
-  {name:"امپراتور",price:3500000},
-  {name:"رویای سفید",price:1700000}
+const products=[
+{name:"طلوع طلایی",price:2500000},{name:"نسیم سلطنتی",price:1900000},
+{name:"راز شب",price:3200000},{name:"لمس بهار",price:2100000},
+{name:"امپراتور",price:3500000},{name:"رویای سفید",price:1700000}
 ];
-
-let cart = [];
-
-const formatter = new Intl.NumberFormat('fa-IR');
-
-function money(value) {
-  return formatter.format(value) + " تومان";
+let cart=[];
+const formatter=new Intl.NumberFormat('fa-IR');
+function money(value){return formatter.format(value)+" تومان"}
+function showNotice(message){
+const notice=document.getElementById("notice");notice.textContent=message;notice.style.display="block";
+clearTimeout(window.noticeTimer);window.noticeTimer=setTimeout(()=>notice.style.display="none",2500);
 }
-
-function showNotice(message) {
-  const notice = document.getElementById("notice");
-  notice.textContent = message;
-  notice.style.display = "block";
-
-  clearTimeout(window.noticeTimer);
-  window.noticeTimer = setTimeout(() => {
-    notice.style.display = "none";
-  }, 2500);
+function addToCart(index){
+const item=cart.find(x=>x.id===index);if(item)item.qty++;else cart.push({id:index,qty:1});
+updateCart();showNotice("محصول به سبد خرید اضافه شد");
 }
-
-function addToCart(index) {
-  const item = cart.find(x => x.id === index);
-
-  if(item) {
-    item.qty++;
-  } else {
-    cart.push({id:index,qty:1});
-  }
-
-  updateCart();
-  showNotice("محصول به سبد خرید اضافه شد");
+function removeFromCart(index){cart=cart.filter(x=>x.id!==index);updateCart()}
+function updateCart(){
+const count=cart.reduce((sum,item)=>sum+item.qty,0);
+document.getElementById("cartCount").textContent=formatter.format(count);
+const container=document.getElementById("cartItems");
+if(cart.length===0){container.textContent="سبد خرید خالی است."}
+else{container.innerHTML=cart.map(item=>{
+const product=products[item.id];
+return `<div class="cart-item"><div><strong>${product.name}</strong><br>${formatter.format(item.qty)} عدد<br>${money(product.price*item.qty)}</div><button class="remove-btn" onclick="removeFromCart(${item.id})">حذف</button></div>`;
+}).join("")}
+const total=cart.reduce((sum,item)=>sum+products[item.id].price*item.qty,0);
+document.getElementById("cartTotal").textContent="مجموع: "+money(total);
 }
-
-function removeFromCart(index) {
-  cart = cart.filter(x => x.id !== index);
-  updateCart();
+function toggleCart(){
+document.getElementById("cartPanel").classList.toggle("open");
+document.getElementById("overlay").classList.toggle("show");
 }
-
-function updateCart() {
-  const count = cart.reduce((sum,item) => sum + item.qty,0);
-  document.getElementById("cartCount").textContent = formatter.format(count);
-
-  const container = document.getElementById("cartItems");
-
-  if(cart.length === 0) {
-    container.textContent = "سبد خرید خالی است.";
-  } else {
-    container.innerHTML = cart.map(item => {
-      const product = products[item.id];
-
-      return `
-        <div class="cart-item">
-          <div>
-            <strong>${product.name}</strong><br>
-            ${formatter.format(item.qty)} عدد
-            <br>${money(product.price * item.qty)}
-          </div>
-          <button class="remove-btn" onclick="removeFromCart(${item.id})">
-            حذف
-          </button>
-        </div>
-      `;
-    }).join("");
-  }
-
-  const total = cart.reduce((sum,item) => {
-    return sum + products[item.id].price * item.qty;
-  },0);
-
-  document.getElementById("cartTotal").textContent = "مجموع: " + money(total);
+function closePanels(){
+document.getElementById("cartPanel").classList.remove("open");
+document.getElementById("overlay").classList.remove("show");
 }
-
-function toggleCart() {
-  const panel = document.getElementById("cartPanel");
-  const overlay = document.getElementById("overlay");
-
-  panel.classList.toggle("open");
-  overlay.classList.toggle("show");
+function openOrder(){
+if(cart.length===0){showNotice("ابتدا محصولی به سبد خرید اضافه کنید");return}
+closePanels();document.getElementById("orderModal").classList.add("open");
 }
-
-function closePanels() {
-  document.getElementById("cartPanel").classList.remove("open");
-  document.getElementById("overlay").classList.remove("show");
-}
-
-function openOrder() {
-  if(cart.length === 0) {
-    showNotice("ابتدا محصولی به سبد خرید اضافه کنید");
-    return;
-  }
-
-  closePanels();
-  document.getElementById("orderModal").classList.add("open");
-}
-
-function closeOrder() {
-  document.getElementById("orderModal").classList.remove("open");
-}
-
-document.getElementById("orderForm").addEventListener("submit",function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById("customerName").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
-  const address = document.getElementById("customerAddress").value.trim();
-
-  if(!name || !phone || !address) {
-    showNotice("لطفاً همه فیلدها را تکمیل کنید");
-    return;
-  }
-
-  const total = cart.reduce((sum,item) => {
-    return sum + products[item.id].price * item.qty;
-  },0);
-
-  alert(
-    "سفارش نمایشی شما ثبت شد.\n\n" +
-    "نام: " + name + "\n" +
-    "شماره تماس: " + phone + "\n" +
-    "مبلغ سفارش: " + money(total) +
-    "\n\nاین سایت هنوز به سرور ثبت سفارش و درگاه پرداخت متصل نیست."
-  );
-
-  cart = [];
-  updateCart();
-  closeOrder();
-  this.reset();
+function closeOrder(){document.getElementById("orderModal").classList.remove("open")}
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
+const name=document.getElementById("customerName").value.trim();
+const phone=document.getElementById("customerPhone").value.trim();
+const address=document.getElementById("customerAddress").value.trim();
+if(!name||!phone||!address){showNotice("لطفاً همه فیلدها را تکمیل کنید");return}
+const total=cart.reduce((sum,item)=>sum+products[item.id].price*item.qty,0);
+alert("سفارش نمایشی شما ثبت شد.\n\nنام: "+name+"\nشماره تماس: "+phone+"\nمبلغ سفارش: "+money(total)+"\n\nاین سایت هنوز به سرور ثبت سفارش و درگاه پرداخت متصل نیست.");
+cart=[];updateCart();closeOrder();this.reset();
 });
 </script>
-
 <script type="module">
 import * as THREE from 'three';
-
-const canvas = document.getElementById('scene');
-
-if(canvas) {
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x090909);
-
-  const camera = new THREE.PerspectiveCamera(
-    35,
-    canvas.clientWidth / canvas.clientHeight,
-    0.1,
-    100
-  );
-
-  camera.position.set(0,0,7);
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias:true,
-    alpha:true
-  });
-
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
-  renderer.setSize(canvas.clientWidth,canvas.clientHeight);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.3;
-
-  scene.add(new THREE.AmbientLight(0xffffff,2));
-
-  const goldLight = new THREE.PointLight(0xe9bd65,90,20);
-  goldLight.position.set(3,3,4);
-  scene.add(goldLight);
-
-  const sideLight = new THREE.PointLight(0x9b672b,65,20);
-  sideLight.position.set(-3,0,2);
-  scene.add(sideLight);
-
-  const bottle = new THREE.Group();
-  scene.add(bottle);
-
-  const glass = new THREE.MeshPhysicalMaterial({
-    color:0xb68b43,
-    metalness:0.45,
-    roughness:0.17,
-    transparent:true,
-    opacity:0.9,
-    clearcoat:1,
-    clearcoatRoughness:0.08
-  });
-
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(1.5,2.2,0.75),
-    glass
-  );
-
-  body.position.y=-0.1;
-  bottle.add(body);
-
-  const gold = new THREE.MeshStandardMaterial({
-    color:0xc9a45c,
-    metalness:0.9,
-    roughness:0.2
-  });
-
-  const neck = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.27,0.27,0.25,32),
-    gold
-  );
-
-  neck.position.y=1.18;
-  bottle.add(neck);
-
-  const cap = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3
+const canvas=document.getElementById('scene');
+if(canvas){
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x090909);
+const camera=new THREE.PerspectiveCamera(35,canvas.clientWidth/canvas.clientHeight,0.1,100);
+camera.position.set(0,0,7);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
+renderer.setSize(canvas.clientWidth,canvas.clientHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;
+scene.add(new THREE.AmbientLight(0xffffff,2));
+const goldLight=new THREE.PointLight(0xe9bd65,90,20);goldLight.position.set(3,3,4);scene.add(goldLight);
+const sideLight=new THREE.PointLight(0x9b672b,65,20);sideLight.position.set(-3,0,2);scene.add(sideLight);
+const bottle=new THREE.Group();scene.add(bottle);
+const glass=new THREE.MeshPhysicalMaterial({color:0xb68b43,metalness:0.45,roughness:0.17,transparent:true,opacity:0.9,clearcoat:1,clearcoatRoughness:0.08});
+const body=new THREE.Mesh(new THREE.BoxGeometry(1.5,2.2,0.75),glass);body.position.y=-0.1;bottle.add(body);
+const gold=new THREE.MeshStandardMaterial({color:0xc9a45c,metalness:0.9,roughness:0.2});
+const neck=new THREE.Mesh(new THREE.CylinderGeometry(0.27,0.27,0.25,32),gold);neck.position.y=1.18;bottle.add(neck);
+const cap=new THREE.Mesh(new THREE.CylinderGeometry(0.32,0.34,0.55,32),gold);cap.position.y=1.55;bottle.add(cap);
+const label=new THREE.Mesh(new THREE.BoxGeometry(1.12,0.65,0.025),new THREE.MeshStandardMaterial({color:0x17130c,metalness:0.5,roughness:0.4}));
+label.position.set(0,-0.1,0.39);bottle.add(label);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(1.05,0.012,12,100),gold);ring.position.z=-0.7;bottle.add(ring);
+const floor=new THREE.Mesh(new THREE.CircleGeometry(1.8,64),new THREE.MeshBasicMaterial({color:0x21180b,transparent:true,opacity:0.45}));
+floor.rotation.x=-Math.PI/2;floor.position.y=-1.45;scene.add(floor);
+let mouseX=0,targetRotation=0;
+canvas.addEventListener('pointermove',e=>{const rect=canvas.getBoundingClientRect();mouseX=(e.clientX-rect.left)/rect.width-0.5});
+function resize(){
+const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;
+camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);
+}
+window.addEventListener('resize',resize);
+function animate(){
+requestAnimationFrame(animate);
+const scroll=window.scrollY;targetRotation=mouseX*0.65+scroll*0.0006;
+bottle.rotation.y+=(targetRotation-bottle.rotation.y)*0.04;
+bottle.rotation.x=Math.sin(Date.now()*0.0005)*0.045;
+bottle.position.y=Math.sin(Date.now()*0.001)*0.07;
+renderer.render(scene,camera);
+}
+animate();
+}
+</script>
+</body>
+</html>
