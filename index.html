@@ -1,274 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090909">
-<meta name="description" content="رایحه‌نو؛ تجربه‌ای لوکس از دنیای عطر و ادکلن">
-<title>رایحه‌نو | دنیایی از عطر و ادکلن</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}
-</script>
-<style>
-:root{--bg:#090909;--panel:#121212;--gold:#c9a45c;--gold-light:#f0d99b;--white:#f5f1e8;--muted:#99948b;--line:rgba(201,164,92,.22)}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:'Vazirmatn',sans-serif;overflow-x:hidden}
-button{font-family:inherit;cursor:pointer}a{text-decoration:none;color:inherit}
-header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;position:fixed;width:100%;top:0;z-index:50;background:rgba(9,9,9,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.logo{font-size:25px;font-weight:800;color:var(--gold);letter-spacing:-1px}.logo span{color:white}
-nav{display:flex;gap:30px;font-size:13px;color:#d2c9b8}nav a:hover{color:var(--gold)}
-.cart-button{border:1px solid var(--gold);background:transparent;color:var(--gold-light);padding:10px 17px;border-radius:30px}
-.cart-count{background:var(--gold);color:#111;border-radius:50%;padding:1px 6px;margin-right:5px}
-.hero{min-height:100vh;padding:125px 8% 60px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;position:relative;overflow:hidden}
-.hero:before{content:"";position:absolute;width:450px;height:450px;background:rgba(183,133,48,.10);filter:blur(100px);border-radius:50%;top:20%;left:15%}
-.hero-content{position:relative;z-index:2}.eyebrow{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:22px}
-.hero h1{font-size:clamp(42px,6vw,76px);line-height:1.5;font-weight:800}.hero h1 span{color:var(--gold)}
-.hero p{color:var(--muted);line-height:2.3;max-width:480px;margin:18px 0 30px;font-size:14px}
-.primary-btn{display:inline-block;padding:14px 28px;background:linear-gradient(120deg,#a67b35,#e7c77d);color:#17120a;border:0;border-radius:4px;font-weight:700;transition:.3s}
-.primary-btn:hover{transform:translateY(-4px);box-shadow:0 10px 35px #c9a45c33}
-.secondary-btn{display:inline-block;padding:13px 24px;border:1px solid var(--line);color:var(--white);border-radius:4px;margin-right:10px}
-.scene-wrap{height:510px;width:100%;position:relative}#scene{width:100%;height:100%;display:block;touch-action:none;cursor:grab}#scene:active{cursor:grabbing}.scene-control-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);color:#d8c18d;background:rgba(12,10,7,.72);border:1px solid rgba(201,164,92,.28);border-radius:30px;padding:7px 13px;font-size:11px;white-space:nowrap;pointer-events:none}
-.scene-label{position:absolute;bottom:30px;right:50%;transform:translateX(50%);color:var(--gold);font-size:12px;letter-spacing:3px;white-space:nowrap}
-.scroll-hint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:#777;font-size:11px}
-.section{padding:100px 8%}.section-heading{text-align:center;margin-bottom:55px}
-.section-heading small{color:var(--gold);letter-spacing:2px}.section-heading h2{font-size:35px;margin-top:12px}
-.section-heading p{color:var(--muted);font-size:13px;margin-top:12px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.product{background:linear-gradient(145deg,#171717,#0e0e0e);border:1px solid var(--line);padding:20px;border-radius:8px;text-align:center;transition:.35s}
-.product:hover{transform:translateY(-8px);border-color:var(--gold)}
-.product-art{height:210px;display:grid;place-items:center;background:radial-gradient(circle,#4b3920 0%,#19140d 40%,transparent 72%);margin-bottom:18px}
-.mini-bottle{width:75px;height:125px;border:2px solid #c9a45c;border-radius:9px 9px 16px 16px;background:linear-gradient(90deg,#3d2b13,#b58a3d,#30200e);position:relative;box-shadow:0 0 35px #c9a45c33}
-.mini-bottle:before{content:"";position:absolute;width:28px;height:24px;top:-25px;right:21px;background:#c9a45c;border-radius:4px 4px 0 0}
-.mini-bottle:after{content:"R";position:absolute;top:48px;right:0;width:100%;text-align:center;font-family:serif;color:#f5d58c;font-size:27px}
-.product h3{font-size:17px}.product p{color:var(--muted);font-size:12px;margin:10px 0}
-.price{color:var(--gold-light);font-weight:700;margin:15px 0}
-.add-btn{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:10px 22px;border-radius:4px;width:100%}
-.add-btn:hover{background:var(--gold);color:#111}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.feature{padding:30px 20px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#111}
-.feature .symbol{color:var(--gold);font-size:30px;margin-bottom:15px}.feature h3{font-size:16px;margin-bottom:10px}
-.feature p{color:var(--muted);font-size:12px;line-height:2}
-.story{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;background:#101010}
-.story-art{min-height:300px;display:grid;place-items:center;border:1px solid var(--line);background:radial-gradient(circle,#4b351c,#12100c 65%);font-size:100px;color:var(--gold)}
-.story-text h2{font-size:32px;margin-bottom:20px}.story-text p{color:var(--muted);font-size:14px;line-height:2.5}
-footer{border-top:1px solid var(--line);padding:40px 8%;text-align:center;color:var(--muted);font-size:12px;line-height:2.5}
-footer strong{color:var(--gold);font-size:22px}
-.cart-panel{position:fixed;top:0;left:-420px;width:min(390px,90%);height:100%;z-index:100;background:#151515;border-right:1px solid var(--gold);padding:25px;transition:.35s;overflow-y:auto}
-.cart-panel.open{left:0}.cart-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}
-.close-cart{color:var(--gold);background:none;border:0;font-size:25px}.cart-items{padding:25px 0}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #292929;font-size:13px}
-.remove-btn{color:#e99b8e;background:none;border:0;font-size:12px}.cart-total{color:var(--gold);margin:20px 0;font-weight:700}
-.overlay{display:none;position:fixed;inset:0;background:#000a;z-index:90}.overlay.show{display:block}
-.modal{display:none;position:fixed;inset:0;z-index:120;align-items:center;justify-content:center;padding:15px;background:#000b}
-.modal.open{display:flex}.modal-box{background:#171717;border:1px solid var(--gold);padding:28px;width:min(420px,100%);border-radius:10px}
-.modal-box h2{color:var(--gold);margin-bottom:18px}.modal-box input,.modal-box textarea{width:100%;background:#0c0c0c;border:1px solid #393328;color:white;padding:13px;margin-bottom:12px;border-radius:5px;font-family:inherit;direction:rtl}
-.modal-box textarea{min-height:80px}.modal-box button{width:100%}
-.modal-close{float:left;background:none;color:var(--gold);border:0;font-size:22px}
-#notice{position:fixed;bottom:25px;right:50%;transform:translateX(50%);background:#c9a45c;color:#111;padding:12px 22px;border-radius:5px;z-index:200;display:none;font-size:13px}
-@media(max-width:800px){
-header{padding:0 5%}nav{display:none}
-.hero{grid-template-columns:1fr;text-align:center;padding:120px 6% 45px}
-.hero p{margin-right:auto;margin-left:auto}.scene-wrap{height:370px;grid-row:1}.hero-content{grid-row:2}.scroll-hint{display:none}
-.products{grid-template-columns:repeat(2,1fr);gap:12px}.product{padding:12px}.product-art{height:150px}.mini-bottle{transform:scale(.8)}
-.features{grid-template-columns:1fr}.story{grid-template-columns:1fr;gap:25px}
-.section{padding:75px 5%}.section-heading h2{font-size:27px}
-}
-@media(max-width:380px){.products{grid-template-columns:1fr}.logo{font-size:21px}.cart-button{padding:8px 12px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080807">
+  <meta name="description" content="رایحه‌نو؛ تجربه‌ای لوکس برای کشف عطرهای خاص">
+  <title>رایحه‌نو | دنیایی از عطر و ادکلن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
-<header>
-<a href="#" class="logo">رایحه<span>‌نو</span></a>
-<nav>
-<a href="#home">خانه</a><a href="#products">محصولات</a><a href="#features">مزایای ما</a><a href="#story">درباره ما</a>
-</nav>
-<button class="cart-button" onclick="toggleCart()">سبد خرید <span class="cart-count" id="cartCount">۰</span></button>
-</header>
-<main>
-<section class="hero" id="home">
-<div class="hero-content">
-<div class="eyebrow">RAYHANEHNO • LUXURY PERFUME</div>
-<h1>دنیایی از<br><span>عطر و ادکلن</span></h1>
-<p>رایحه‌ای که شخصیت شما را روایت می‌کند. تجربه‌ای متفاوت از انتخاب عطرهای خاص، در دنیای لوکس رایحه‌نو.</p>
-<a href="#products" class="primary-btn">مشاهده محصولات</a>
-<a href="#story" class="secondary-btn">داستان ما</a>
-</div>
-<div class="scene-wrap"><canvas id="scene"></canvas><div class="scene-control-hint">برای چرخش، بکشید یا لمس کنید؛ با رها کردن به حالت اول برمی‌گردد</div><div class="scene-label">DISCOVER YOUR SIGNATURE SCENT</div></div>
-<div class="scroll-hint">برای کشف بیشتر اسکرول کنید ↓</div>
-</section>
-<section class="section" id="products">
-<div class="section-heading"><small>OUR COLLECTION</small><h2>کلکسیون رایحه‌نو</h2><p>رایحه مورد علاقه خود را انتخاب کنید.</p></div>
-<div class="products">
-<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>طلوع طلایی</h3><p>رایحه گرم و شیرین | مناسب شب</p><div class="price">۲,۵۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(0)">افزودن به سبد</button></article>
-<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>نسیم سلطنتی</h3><p>رایحه خنک و ملایم | مناسب روز</p><div class="price">۱,۹۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(1)">افزودن به سبد</button></article>
-<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>راز شب</h3><p>رایحه تلخ و چوبی | خاص و ماندگار</p><div class="price">۳,۲۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(2)">افزودن به سبد</button></article>
-<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>لمس بهار</h3><p>رایحه گلی و لطیف | مناسب روز</p><div class="price">۲,۱۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(3)">افزودن به سبد</button></article>
-<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>امپراتور</h3><p>رایحه رسمی و قدرتمند</p><div class="price">۳,۵۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(4)">افزودن به سبد</button></article>
-<article class="product"><div class="product-art"><div class="mini-bottle"></div></div><h3>رویای سفید</h3><p>رایحه تمیز و آرامش‌بخش</p><div class="price">۱,۷۰۰,۰۰۰ تومان</div><button class="add-btn" onclick="addToCart(5)">افزودن به سبد</button></article>
-</div>
-</section>
-<section class="section" id="features">
-<div class="section-heading"><small>WHY RAYHANEHNO</small><h2>تجربه‌ای متفاوت</h2><p>جزئیات کوچک، تفاوت‌های بزرگ می‌سازند.</p></div>
-<div class="features">
-<div class="feature"><div class="symbol">✧</div><h3>انتخاب هوشمند رایحه</h3><p>کمک به انتخاب عطر بر اساس سلیقه، فصل و موقعیت.</p></div>
-<div class="feature"><div class="symbol">♛</div><h3>توجه به اصالت کالا</h3><p>هدف ما ارائه اطلاعات شفاف درباره محصولات است.</p></div>
-<div class="feature"><div class="symbol">◇</div><h3>تجربه خرید آسان</h3><p>دسترسی ساده به محصولات و ثبت سفارش آنلاین.</p></div>
-</div>
-</section>
-<section class="section story" id="story">
-<div class="story-art">✦</div>
-<div class="story-text"><small class="eyebrow">OUR STORY</small><h2>داستان رایحه‌نو</h2><p>رایحه‌نو با یک ایده ساده آغاز شد: انتخاب عطر باید تجربه‌ای لذت‌بخش و آسان باشد. ما می‌خواهیم دنیای رایحه‌ها را به شکلی متفاوت به شما معرفی کنیم؛ از رایحه‌های روزمره تا انتخاب‌های خاص و فراموش‌نشدنی.</p></div>
-</section>
-</main>
-<footer><strong>رایحه‌نو</strong><p>دنیایی از عطر و ادکلن</p><p>© 2026 Rayhanehno | تمامی حقوق محفوظ است.</p><p>این نسخه، نمونه نمایشی فروشگاه اینترنتی است.</p></footer>
-<div class="overlay" id="overlay" onclick="closePanels()"></div>
-<aside class="cart-panel" id="cartPanel">
-<div class="cart-header"><h3>سبد خرید شما</h3><button class="close-cart" onclick="toggleCart()">×</button></div>
-<div class="cart-items" id="cartItems">سبد خرید خالی است.</div>
-<div class="cart-total" id="cartTotal">مجموع: ۰ تومان</div>
-<button class="primary-btn" style="width:100%" onclick="openOrder()">ادامه و ثبت سفارش</button>
-</aside>
-<div class="modal" id="orderModal"><div class="modal-box">
-<button class="modal-close" onclick="closeOrder()">×</button><h2>ثبت سفارش رایحه‌نو</h2>
-<form id="orderForm">
-<input id="customerName" placeholder="نام و نام خانوادگی" required>
-<input id="customerPhone" type="tel" placeholder="شماره تماس" required>
-<textarea id="customerAddress" placeholder="آدرس یا توضیحات سفارش" required></textarea>
-<button type="submit" class="primary-btn">ثبت سفارش نمایشی</button>
-</form>
-</div></div>
-<div id="notice"></div>
-<script>
-const products=[
-{name:"طلوع طلایی",price:2500000},{name:"نسیم سلطنتی",price:1900000},
-{name:"راز شب",price:3200000},{name:"لمس بهار",price:2100000},
-{name:"امپراتور",price:3500000},{name:"رویای سفید",price:1700000}
-];
-let cart=[];
-const formatter=new Intl.NumberFormat('fa-IR');
-function money(value){return formatter.format(value)+" تومان"}
-function showNotice(message){
-const notice=document.getElementById("notice");notice.textContent=message;notice.style.display="block";
-clearTimeout(window.noticeTimer);window.noticeTimer=setTimeout(()=>notice.style.display="none",2500);
-}
-function addToCart(index){
-const item=cart.find(x=>x.id===index);if(item)item.qty++;else cart.push({id:index,qty:1});
-updateCart();showNotice("محصول به سبد خرید اضافه شد");
-}
-function removeFromCart(index){cart=cart.filter(x=>x.id!==index);updateCart()}
-function updateCart(){
-const count=cart.reduce((sum,item)=>sum+item.qty,0);
-document.getElementById("cartCount").textContent=formatter.format(count);
-const container=document.getElementById("cartItems");
-if(cart.length===0){container.textContent="سبد خرید خالی است."}
-else{container.innerHTML=cart.map(item=>{
-const product=products[item.id];
-return `<div class="cart-item"><div><strong>${product.name}</strong><br>${formatter.format(item.qty)} عدد<br>${money(product.price*item.qty)}</div><button class="remove-btn" onclick="removeFromCart(${item.id})">حذف</button></div>`;
-}).join("")}
-const total=cart.reduce((sum,item)=>sum+products[item.id].price*item.qty,0);
-document.getElementById("cartTotal").textContent="مجموع: "+money(total);
-}
-function toggleCart(){
-document.getElementById("cartPanel").classList.toggle("open");
-document.getElementById("overlay").classList.toggle("show");
-}
-function closePanels(){
-document.getElementById("cartPanel").classList.remove("open");
-document.getElementById("overlay").classList.remove("show");
-}
-function openOrder(){
-if(cart.length===0){showNotice("ابتدا محصولی به سبد خرید اضافه کنید");return}
-closePanels();document.getElementById("orderModal").classList.add("open");
-}
-function closeOrder(){document.getElementById("orderModal").classList.remove("open")}
-document.getElementById("orderForm").addEventListener("submit",function(e){
-e.preventDefault();
-const name=document.getElementById("customerName").value.trim();
-const phone=document.getElementById("customerPhone").value.trim();
-const address=document.getElementById("customerAddress").value.trim();
-if(!name||!phone||!address){showNotice("لطفاً همه فیلدها را تکمیل کنید");return}
-const total=cart.reduce((sum,item)=>sum+products[item.id].price*item.qty,0);
-alert("سفارش نمایشی شما ثبت شد.\n\nنام: "+name+"\nشماره تماس: "+phone+"\nمبلغ سفارش: "+money(total)+"\n\nاین سایت هنوز به سرور ثبت سفارش و درگاه پرداخت متصل نیست.");
-cart=[];updateCart();closeOrder();this.reset();
-});
-</script>
-<script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js';
-const canvas=document.getElementById('scene');
-if(canvas){
- const scene=new THREE.Scene(); scene.background=new THREE.Color(0x090909);
- const camera=new THREE.PerspectiveCamera(35,canvas.clientWidth/canvas.clientHeight,0.1,100); camera.position.set(0,0,7);
- const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
- renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5)); renderer.setSize(canvas.clientWidth,canvas.clientHeight);
- renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.3;
- scene.add(new THREE.AmbientLight(0xffffff,2));
- const goldLight=new THREE.PointLight(0xe9bd65,90,20); goldLight.position.set(3,3,4); scene.add(goldLight);
- const sideLight=new THREE.PointLight(0x9b672b,65,20); sideLight.position.set(-3,0,2); scene.add(sideLight);
- const modelPivot=new THREE.Group(); scene.add(modelPivot);
- const loader=new GLTFLoader();
- loader.load('./assets/models/perfume-bottle.glb',gltf=>{
-   const model=gltf.scene;
-   const box=new THREE.Box3().setFromObject(model);
-   const size=box.getSize(new THREE.Vector3());
-   const center=box.getCenter(new THREE.Vector3());
-   model.position.sub(center);
-   const maxDim=Math.max(size.x,size.y,size.z)||1;
-   model.scale.setScalar(3.15/maxDim);
-   model.traverse(obj=>{
-     if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;
-       if(obj.material){obj.material= obj.material.clone();
-         if('envMapIntensity' in obj.material) obj.material.envMapIntensity=1.25;
-         if(obj.material.isMeshStandardMaterial || obj.material.isMeshPhysicalMaterial){obj.material.needsUpdate=true;}
-       }
-     }
-   });
-   modelPivot.add(model);
-   const label=document.querySelector('.scene-label'); if(label) label.textContent='رایحه‌نو | تجربه سه‌بعدی عطر';
- },undefined,error=>{
-   console.error('GLB load failed:',error);
-   const label=document.querySelector('.scene-label'); if(label) label.textContent='مدل سه‌بعدی بارگذاری نشد؛ مسیر فایل را بررسی کنید';
- });
- const floor=new THREE.Mesh(new THREE.CircleGeometry(1.8,64),new THREE.MeshBasicMaterial({color:0x21180b,transparent:true,opacity:0.45}));
- floor.rotation.x=-Math.PI/2; floor.position.y=-1.75; scene.add(floor);
- // چرخش تعاملی با ماوس و لمس؛ پس از رها کردن، مدل نرم به زاویه اولیه برمی‌گردد.
- let dragging=false,lastX=0,lastY=0;
- let targetRotX=0,targetRotY=0;
- const dragSpeed=0.008;
- canvas.addEventListener('pointerdown',e=>{
-   dragging=true;lastX=e.clientX;lastY=e.clientY;
-   canvas.setPointerCapture(e.pointerId);
- });
- canvas.addEventListener('pointermove',e=>{
-   if(!dragging)return;
-   const dx=e.clientX-lastX,dy=e.clientY-lastY;
-   lastX=e.clientX;lastY=e.clientY;
-   targetRotY+=dx*dragSpeed;
-   targetRotX+=dy*dragSpeed;
-   targetRotX=Math.max(-0.85,Math.min(0.85,targetRotX));
- });
- function releaseDrag(){
-   dragging=false;
-   targetRotX=0;
-   targetRotY=0;
- }
- canvas.addEventListener('pointerup',releaseDrag);
- canvas.addEventListener('pointercancel',releaseDrag);
- canvas.addEventListener('lostpointercapture',releaseDrag);
- function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);}
- window.addEventListener('resize',resize);
- function animate(){
-   requestAnimationFrame(animate);
-   modelPivot.rotation.x+=(targetRotX-modelPivot.rotation.x)*0.12;
-   modelPivot.rotation.y+=(targetRotY-modelPivot.rotation.y)*0.12;
-   modelPivot.position.y=Math.sin(Date.now()*0.001)*0.06;
-   renderer.render(scene,camera);
- }
- animate();
-}
-</script>
+  <div class="noise"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="رایحه‌نو، صفحه نخست"><span class="brand-mark">ر</span><span>رایحه‌نو<small>RAAYE NO</small></span></a>
+    <nav class="main-nav"><a href="#home" class="active">خانه</a><a href="#collection">کلکسیون</a><a href="#story">داستان ما</a></nav>
+    <button class="cart-trigger" id="open-cart" aria-label="سبد خرید"><span>سبد خرید</span><b id="cart-count">۰</b><i>⌑</i></button>
+  </header>
+
+  <main id="home">
+    <section class="intro section-panel" id="intro">
+      <div class="intro-copy">
+        <div class="eyebrow"><span></span> هنرِ انتخاب یک رایحه</div>
+        <h1>هر رایحه،<br><em>یک امضا.</em></h1>
+        <p>جهانی از عطرهای ماندگار؛ برای لحظه‌هایی که قرار است فراموش نشوند.</p>
+        <a class="gold-button" href="#collection">کشف کلکسیون <span>↙</span></a>
+      </div>
+      <div class="intro-aside"><span class="vertical-word">SCENT IS A MEMORY</span><span class="intro-index">۰۱ <i></i> ۰۴</span></div>
+      <div class="scroll-cue"><span></span> برای کشف رایحه‌ها اسکرول کنید</div>
+    </section>
+
+    <section class="collection" id="collection" aria-label="کلکسیون عطرها">
+      <div class="collection-heading"><span class="eyebrow"><span></span> انتخاب رایحه‌نو</span><span class="collection-count">THE COLLECTION / ۰۳</span></div>
+      <div class="product-stage" aria-hidden="true"><div class="stage-glow"></div><div id="three-root"></div><div class="stage-ring ring-one"></div><div class="stage-ring ring-two"></div><div class="stage-caption">ROTATE THE SCENT <span>✳</span></div></div>
+      <article class="product-panel" data-product="0">
+        <div class="product-copy"><span class="product-number">۰۱ / EAU DE PARFUM</span><h2>طلوعِ <em>طلایی</em></h2><p>ترکیبی گرم و درخشان با شروعی مرکباتی و پایانی عمیق؛ برای حضوری که آرام اما ماندگار است.</p><div class="notes"><span>نت آغازین<b>ترنج · زعفران</b></span><span>نت میانی<b>یاس · چوب صندل</b></span><span>نت پایانی<b>عنبر · مشک</b></span></div><div class="buy-row"><strong>۳٬۸۵۰٬۰۰۰ <small>تومان</small></strong><button class="add-button" data-add="0">افزودن به سبد <span>＋</span></button></div></div>
+        <div class="product-side"><span>01</span><small>GOLDEN HOUR</small></div>
+      </article>
+      <article class="product-panel" data-product="1">
+        <div class="product-copy"><span class="product-number">۰۲ / EAU DE PARFUM</span><h2>شبِ <em>مخملی</em></h2><p>رایحه‌ای عمیق و مرموز با لایه‌هایی از ادویه و چوب؛ انتخابی برای شب‌های خاص و به‌یادماندنی.</p><div class="notes"><span>نت آغازین<b>فلفل صورتی · هل</b></span><span>نت میانی<b>رز تیره · چرم</b></span><span>نت پایانی<b>عود · وانیل</b></span></div><div class="buy-row"><strong>۴٬۲۵۰٬۰۰۰ <small>تومان</small></strong><button class="add-button" data-add="1">افزودن به سبد <span>＋</span></button></div></div>
+        <div class="product-side"><span>02</span><small>VELVET NIGHT</small></div>
+      </article>
+      <article class="product-panel" data-product="2">
+        <div class="product-copy"><span class="product-number">۰۳ / EAU DE PARFUM</span><h2>سکوتِ <em>سپید</em></h2><p>پاک، لطیف و مینیمال؛ ترکیبی روشن از گل‌های سفید و مشک که با پوست شما یکی می‌شود.</p><div class="notes"><span>نت آغازین<b>نرولی · گلابی</b></span><span>نت میانی<b>شکوفه پرتقال · گل پنبه</b></span><span>نت پایانی<b>مشک سفید · سدر</b></span></div><div class="buy-row"><strong>۳٬۴۹۰٬۰۰۰ <small>تومان</small></strong><button class="add-button" data-add="2">افزودن به سبد <span>＋</span></button></div></div>
+        <div class="product-side"><span>03</span><small>WHITE SILENCE</small></div>
+      </article>
+    </section>
+
+    <section class="story section-panel" id="story"><div class="story-orbit">R<br>A<br>Y<br>E<br>H</div><div class="story-copy"><span class="eyebrow"><span></span> نگاه رایحه‌نو</span><h2>عطر فقط یک بو نیست؛<br><em>روایتی از شماست.</em></h2><p>در رایحه‌نو، انتخاب عطر قرار است به‌اندازه خودِ رایحه دلنشین باشد. با شناخت نت‌ها، سلیقه و حال‌وهوای خودتان، امضای بویایی‌تان را پیدا کنید.</p><a class="text-link" href="#collection">بازگشت به کلکسیون <span>←</span></a></div><div class="story-foot"><span>رایحه‌نو</span><span>دنیایی از عطر و ادکلن است</span><span>EST. 2026</span></div></section>
+  </main>
+
+  <footer><a class="brand" href="#home"><span class="brand-mark">ر</span><span>رایحه‌نو<small>RAAYE NO</small></span></a><span>© تمامی حقوق برای رایحه‌نو محفوظ است.</span><a href="#home">بازگشت به بالا ↑</a></footer>
+
+  <div class="cart-backdrop" id="cart-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="سبد خرید" aria-hidden="true"><div class="drawer-head"><div><span class="eyebrow">انتخاب‌های شما</span><h3>سبد خرید</h3></div><button class="icon-close" id="close-cart" aria-label="بستن">×</button></div><div id="cart-items" class="cart-items"><div class="empty-cart">سبد خرید شما هنوز خالی است.</div></div><div class="drawer-bottom"><div class="total-line"><span>مبلغ کل</span><strong id="cart-total">۰ تومان</strong></div><button id="checkout-button" class="gold-button full-button" disabled>ادامه و ثبت سفارش <span>←</span></button><small>ثبت سفارش در این نسخه نمایشی است.</small></div></aside>
+
+  <div class="modal-backdrop" id="checkout-modal"><div class="checkout-card"><button class="icon-close modal-close" id="close-checkout" aria-label="بستن">×</button><span class="eyebrow"><span></span> یک قدم تا انتخاب شما</span><h3>اطلاعات سفارش</h3><p>برای تکمیل نمایشی سفارش، اطلاعات زیر را وارد کنید.</p><form id="checkout-form"><label>نام و نام خانوادگی<input name="name" required autocomplete="name" placeholder="نام شما"></label><label>شماره تماس<input name="phone" required inputmode="tel" pattern="[0-9۰-۹+\- ]{8,16}" placeholder="09xxxxxxxxx"></label><label>نشانی تحویل<textarea name="address" required rows="3" placeholder="نشانی دریافت سفارش"></textarea></label><button class="gold-button full-button" type="submit">ثبت سفارش و ادامه <span>←</span></button></form><small class="form-note">اطلاعات این فرم به سرور ارسال نمی‌شود؛ این نسخه صرفاً نمایشی است.</small></div></div>
+
+  <div class="success-screen" id="success-screen" aria-hidden="true"><div class="success-card"><div class="success-symbol">✓</div><span class="eyebrow">RAYEH NO · CHECKOUT</span><h2>یک قدم تا <em>رایحه شما</em></h2><p>شما با موفقیت به درگاه پرداخت متصل شدید.</p><div class="success-divider"></div><strong>این یک درگاه نمایشی است</strong><small>هیچ پرداخت واقعی انجام نشده و مبلغی دریافت نمی‌شود.</small><button class="gold-button full-button" id="finish-order">بازگشت به فروشگاه</button></div></div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="assets/app.js"></script>
 </body>
 </html>
